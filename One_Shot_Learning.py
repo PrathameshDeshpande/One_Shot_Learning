@@ -234,10 +234,9 @@ dense_layer = Dense(128, name='dense_layer')(reshape_layer)
 norm_layer = Lambda(lambda  x: K.l2_normalize(x, axis=1), name='norm_layer')(dense_layer)
 
 
-# Final Model
+
 model = Model(inputs=[myInput], outputs=norm_layer)
 
-# Load weights from csv files (which was exported from Openface torch model)
 weights = utils.weights
 weights_dict = utils.load_weights()
 
@@ -249,7 +248,6 @@ for name in weights:
     model.get_layer(name).set_weights(weights_dict[name])
 
 def image_to_embedding(image, model):
-    #image = cv2.resize(image, (96, 96), interpolation=cv2.INTER_AREA)
     image = cv2.resize(image, (96, 96))
     img = image[...,::-1]
     img = np.around(np.transpose(img, (0,1,2))/255.0, decimals=12)
@@ -341,7 +339,6 @@ face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 count = 0
 while(True):
     ret, img = cam.read()
-    #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_detector.detectMultiScale(img, 1.3, 5)
     for (x,y,w,h) in faces:
         x1 = x
