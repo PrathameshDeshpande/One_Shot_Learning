@@ -1,2 +1,2 @@
 # One_Shot_Learning
-This is one shot Learning implementations
+This is the one shot Learning implementations
